@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
 import 'package:h4h/Comman/Constants.dart';
 import 'package:h4h/Comman/services.dart';
+import 'package:h4h/component/appbar.dart';
 import 'package:h4h/screen/item.dart';
 
 class subcat extends StatefulWidget {
@@ -53,11 +54,7 @@ class _subcatState extends State<subcat> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(widget.Name.toString().toUpperCase()),
-        backgroundColor: Colors.blue[300],
-      ),
+      appBar: myAppBar(context, widget.Name),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(

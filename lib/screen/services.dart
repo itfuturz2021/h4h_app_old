@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:h4h/Comman/services.dart';
+import 'package:h4h/component/appbar.dart';
+import 'package:h4h/screen/servicesDetail.dart';
 import 'package:h4h/screen/signup.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -49,14 +51,7 @@ class _servicesState extends State<services> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blue[300],
-        centerTitle: true,
-        title: Text(
-          "Services",
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
+      appBar: myAppBar(context, "Services"),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
@@ -76,7 +71,12 @@ class _servicesState extends State<services> {
               itemBuilder: (BuildContext context, int index) {
                 return InkWell(
                   onTap: () {
-                    Navigator.pushNamed(context, '/servicesDetail');
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => servicesDetail(
+                                  servicesname: data[index]["serviceName"],
+                                )));
                   },
                   child: Padding(
                       padding: const EdgeInsets.all(5.0),

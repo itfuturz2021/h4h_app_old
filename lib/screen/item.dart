@@ -1,7 +1,12 @@
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
+import 'package:h4h/Comman/Constants.dart';
 import 'package:h4h/Comman/services.dart';
+import 'package:h4h/component/appbar.dart';
+import 'package:h4h/screen/Detail.dart';
+import 'package:badges/badges.dart';
 
 class item extends StatefulWidget {
   String catid, subcatid, name;
@@ -52,14 +57,7 @@ class _itemState extends State<item> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.blue[300],
-        title: Text(
-          widget.name,
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
+      appBar: myAppBar(context, widget.name),
       body: Column(
         children: [
           Expanded(
@@ -68,25 +66,167 @@ class _itemState extends State<item> {
                 scrollDirection: Axis.vertical,
                 itemBuilder: (BuildContext context, int index) => InkWell(
                       onTap: () {
-                        Navigator.pushNamed(context, '/detail');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => detail(
+                                      data: data[index],
+                                    )));
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(top: 10.0),
                         child: Card(
+                          elevation: 3.0,
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadiusDirectional.circular(10.0)),
                           child: Container(
                             height: 160,
-                            color: Colors.white,
-                            child: Center(
-                              child: InkWell(
-                                onTap: () {
-                                  Navigator.pushNamed(context, '/mycart');
-                                },
-                                child: Container(
-                                  height: 100,
-                                  width: 100,
-                                  color: Colors.red,
-                                  child: Text("hello"),
-                                ),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    width: 130,
+                                    decoration: BoxDecoration(
+                                        color: Colors.grey,
+                                        image: DecorationImage(
+                                            image: data[index]["itemImage"] ==
+                                                    null
+                                                ? AssetImage(
+                                                    "images/h4hblk.png")
+                                                : NetworkImage(image_url +
+                                                    data[index]["itemImage"]),
+                                            fit: BoxFit.fill),
+                                        borderRadius:
+                                            BorderRadiusDirectional.circular(
+                                                10.0)),
+                                  ),
+                                  SizedBox(
+                                    width: 20.0,
+                                  ),
+                                  Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            data[index]["itemName"].toString(),
+                                            style: TextStyle(
+                                                color: Colors.blue[300],
+                                                fontSize: 18),
+                                          ),
+                                          Text(
+                                            data[index]["volumeId"][0]
+                                                    ["volumeName"]
+                                                .toString(),
+                                            style: TextStyle(
+                                                color: Colors.blue[300],
+                                                fontSize: 15),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            '\u{20B9}',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 22,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            data[index]["price"].toString(),
+                                            style: TextStyle(
+                                                color: Colors.black45,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              InkWell(
+                                                onTap: () {},
+                                                child: Container(
+                                                  height: 30,
+                                                  width: 40,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadiusDirectional
+                                                            .only(
+                                                                topStart: Radius
+                                                                    .circular(
+                                                                        8.0),
+                                                                bottomStart: Radius
+                                                                    .circular(
+                                                                        8.0)),
+                                                    color: Colors.blue[300],
+                                                  ),
+                                                  child: Center(
+                                                    child: Icon(
+                                                      Icons.remove,
+                                                      color: Colors.white,
+                                                      size: 20.0,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                height: 30,
+                                                width: 40,
+                                                color: Colors.blue[100],
+                                                child: Center(
+                                                    child: Text(
+                                                  "00",
+                                                  style: TextStyle(
+                                                      color: Colors.black45),
+                                                )),
+                                              ),
+                                              InkWell(
+                                                onTap: () {},
+                                                child: Container(
+                                                  height: 30,
+                                                  width: 40,
+                                                  child: Center(
+                                                    child: Icon(
+                                                      Icons.add,
+                                                      color: Colors.white,
+                                                      size: 20.0,
+                                                    ),
+                                                  ),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadiusDirectional
+                                                            .only(
+                                                                topEnd: Radius
+                                                                    .circular(
+                                                                        10.0),
+                                                                bottomEnd: Radius
+                                                                    .circular(
+                                                                        10.0)),
+                                                    color: Colors.blue[300],
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
                             ),
                           ),

@@ -6,7 +6,11 @@ import 'package:carousel_pro/carousel_pro.dart';
 import 'package:h4h/Comman/Constants.dart';
 import 'package:h4h/Comman/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:h4h/component/BottomBanners.dart';
 import 'package:h4h/component/LoadingComponent.dart';
+import 'package:h4h/component/appbar.dart';
+import 'package:h4h/screen/Detail.dart';
+import 'package:h4h/screen/SideMenu.dart';
 import 'package:h4h/screen/Subcat.dart';
 import 'package:h4h/screen/item.dart';
 
@@ -19,12 +23,14 @@ class _dashboardState extends State<dashboard> {
   bool isLoading = false;
   List data = [];
   List bdata = [];
+  List mdata = [];
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getcategory();
     getbanner();
+    mostpopular();
   }
 
   getcategory() async {
@@ -44,6 +50,32 @@ class _dashboardState extends State<dashboard> {
               isLoading = false;
               print("123456");
               print(data);
+            });
+          }
+        });
+      }
+    } on SocketException catch (_) {
+      Fluttertoast.showToast(msg: "No Internet Connection");
+    }
+  }
+
+  mostpopular() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        setState(() {
+          isLoading = true;
+        });
+        var body = {};
+
+        Services.apiHandler(apiName: "admin/getPopularItem", body: body)
+            .then((responseData) async {
+          if (responseData.IsSuccess == true) {
+            setState(() {
+              mdata = responseData.Data;
+              isLoading = false;
+              print("123456");
+              print(mdata);
             });
           }
         });
@@ -82,15 +114,8 @@ class _dashboardState extends State<dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.blue[300],
-        title: Text(
-          "H4H",
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
-      drawer: Drawer(),
+      appBar: myAppBar(context, "Hardware 4 Home"),
+      drawer: SideMenu(),
       body: isLoading == true
           ? LoadingComponent()
           : SingleChildScrollView(
@@ -222,8 +247,7 @@ class _dashboardState extends State<dashboard> {
                                     child: Container(
                                       child: GridView.builder(
                                         physics: BouncingScrollPhysics(),
-                                        // shrinkWrap: true,
-
+                                        shrinkWrap: true,
                                         padding: EdgeInsets.all(10),
                                         itemCount: 9,
                                         gridDelegate:
@@ -269,22 +293,31 @@ class _dashboardState extends State<dashboard> {
                                                                 context)
                                                             .size
                                                             .width,
-                                                        decoration: BoxDecoration(
-                                                            image: DecorationImage(
-                                                                image: AssetImage(
-                                                                    "images/h4hb.png"),
-                                                                fit: BoxFit
-                                                                    .cover),
-                                                            color: Colors.white,
-                                                            border: Border.all(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                                image:
+                                                                    DecorationImage(
+                                                                        image: data[index]["categoryImage"] !=
+                                                                                null
+                                                                            ? NetworkImage(
+                                                                                image_url + data[index]["categoryImage"],
+                                                                              )
+                                                                            : AssetImage(
+                                                                                "images/h4hb.png"),
+                                                                        fit: BoxFit
+                                                                            .cover),
                                                                 color: Colors
-                                                                    .grey[100],
-                                                                width: 1),
-                                                            borderRadius:
-                                                                BorderRadius.all(
-                                                                    Radius.circular(
-                                                                        10.0)),
-                                                            boxShadow: [
+                                                                    .white,
+                                                                border: Border.all(
+                                                                    color: Colors
+                                                                            .grey[
+                                                                        100],
+                                                                    width: 1),
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10.0)),
+                                                                boxShadow: [
                                                               BoxShadow(
                                                                   color: Colors
                                                                       .grey[400]
@@ -356,14 +389,20 @@ class _dashboardState extends State<dashboard> {
                                   Expanded(
                                     child: Container(
                                       child: ListView.builder(
-                                          itemCount: 4,
+                                          itemCount: mdata.length,
                                           scrollDirection: Axis.horizontal,
                                           itemBuilder: (BuildContext context,
                                                   int index) =>
                                               InkWell(
                                                 onTap: () {
-                                                  Navigator.pushNamed(
-                                                      context, '/detail');
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              detail(
+                                                                data: mdata[
+                                                                    index],
+                                                              )));
                                                 },
                                                 child: Padding(
                                                   padding:
@@ -386,128 +425,20 @@ class _dashboardState extends State<dashboard> {
                                                                   .height *
                                                               0.083,
                                                       width: 150,
-                                                      child: Column(
-                                                        children: [
-                                                          Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceBetween,
-                                                            children: [
-                                                              Column(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                children: [
-                                                                  SizedBox(
-                                                                    width: 20,
-                                                                  ),
-                                                                  /* Text(
-                                                              data[index]["itemNo"],
-                                                              style: TextStyle(
-                                                                  fontSize: 18,
-                                                                  color: Colors.green[400]),
-                                                            ), */
-                                                                ],
-                                                              ),
-                                                              Column(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                children: [
-                                                                  Row(
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .center,
-                                                                    children: [
-                                                                      /*        Container(
-                                                                  padding:
-                                                                      EdgeInsets.only(top: 5.0),
-                                                                  decoration: BoxDecoration(
-                                                                      color: Colors.white,
-                                                                      border: Border.all(
-                                                                          color: Colors.black),
-                                                                      //border: Border.all(color: Colors.gray[300]),
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              12.0)),
-                                                                  height: MediaQuery.of(context)
-                                                                          .size
-                                                                          .height *
-                                                                      0.055,
-                                                                  width: MediaQuery.of(context)
-                                                                          .size
-                                                                          .width *
-                                                                      0.20,
-                                                                        child: Center(
-                                                                    child: TextFormField(
-                                                                      controller:
-                                                                          textEditingControllers[
-                                                                              index],
-                                                                      keyboardType:
-                                                                          TextInputType.number,
-                                                                      cursorColor: Colors.green,
-                                                                      decoration: InputDecoration(
-                                                                          contentPadding:
-                                                                              EdgeInsets.only(
-                                                                                  left: 10.0,
-                                                                                  bottom: 10.0),
-                                                                          // prefixIcon: icon,
-
-                                                                          border:
-                                                                              InputBorder.none,
-                                                                          counterText: ""),
-                                                                    ),
-                                                                  ),
-                                                                ),*/
-                                                                      SizedBox(
-                                                                        width:
-                                                                            10,
-                                                                      ),
-                                                                      /*   InkWell(
-                                                                  onTap: () {
-                                                                    print("hello");
-                                                                    setState(() {
-                                                                      data.removeAt(index);
-                                                                      textEditingControllers
-                                                                          .removeAt(index);
-                                                                    });
-                                                                  },
-                                                                  child: Container(
-                                                                      decoration: BoxDecoration(
-                                                                          color: Colors.red,
-
-                                                                          //border: Border.all(color: Colors.gray[300]),
-                                                                          borderRadius:
-                                                                              BorderRadius
-                                                                                  .circular(
-                                                                                      12.0)),
-                                                                      height:
-                                                                          MediaQuery.of(context)
-                                                                                  .size
-                                                                                  .height *
-                                                                              0.054,
-                                                                      width:
-                                                                          MediaQuery.of(context)
-                                                                                  .size
-                                                                                  .width *
-                                                                              0.15,
-                                                                      child: Center(
-                                                                          child: Icon(
-                                                                        Icons.clear,
-                                                                        color: Colors.white,
-                                                                      ))),
-                                                                ), */
-                                                                      SizedBox(
-                                                                        width:
-                                                                            10,
-                                                                      ),
-                                                                    ],
+                                                      decoration: BoxDecoration(
+                                                        image: DecorationImage(
+                                                            image: mdata[index][
+                                                                        "itemImage"] !=
+                                                                    null
+                                                                ? NetworkImage(
+                                                                    image_url +
+                                                                        mdata[index]
+                                                                            [
+                                                                            "itemImage"],
                                                                   )
-                                                                ],
-                                                              )
-                                                            ],
-                                                          ),
-                                                        ],
+                                                                : AssetImage(
+                                                                    "images/h4hb.png"),
+                                                            fit: BoxFit.cover),
                                                       ),
                                                     ),
                                                   ),
@@ -522,53 +453,12 @@ class _dashboardState extends State<dashboard> {
                         ),
                       ],
                     ),
-                    Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Container(
-                          height: 500,
-                          width: MediaQuery.of(context).size.width,
-                          child: ListView.builder(
-                              itemCount: bdata.length,
-                              scrollDirection: Axis.vertical,
-                              itemBuilder: (BuildContext context, int index) =>
-                                  InkWell(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => item(
-                                                    catid: bdata[index]
-                                                        ["categoryId"],
-                                                    subcatid: bdata[index]
-                                                        ["subCategoryId"],
-                                                    name: bdata[index]
-                                                        ["bannerName"],
-                                                  )));
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(top: 10.0),
-                                      child: Card(
-                                        child: Container(
-                                          height: 220,
-                                          decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              image: DecorationImage(
-                                                  image: NetworkImage(
-                                                      image_url +
-                                                          bdata[index]
-                                                              ["bannerImage"]),
-                                                  fit: BoxFit.cover)),
-                                          child: Center(
-                                            child: Text("hkllooo"),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  )),
-                        ),
-                      ],
-                    )
+                    Container(
+                      margin: EdgeInsets.only(top: 8.0),
+                      // height: height,
+                      color: Colors.white,
+                      child: BottomBanners(),
+                    ),
                   ],
                 ),
               ),

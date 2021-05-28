@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:h4h/component/appbar.dart';
 
 class mycart extends StatefulWidget {
   @override
@@ -9,14 +10,7 @@ class _mycartState extends State<mycart> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          "My cart",
-          style: TextStyle(color: Colors.white),
-        ),
-        backgroundColor: Colors.blue[300],
-      ),
+      appBar: myAppBar(context, "My Cart"),
       body: Center(
         child: Text("helloooo"),
       ),
