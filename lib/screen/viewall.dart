@@ -73,7 +73,7 @@ class _viewallState extends State<viewall> {
                   mainAxisSpacing: 3,
                   crossAxisSpacing: 3,
                   childAspectRatio: MediaQuery.of(context).size.width /
-                      (MediaQuery.of(context).size.height * 0.64),
+                      (MediaQuery.of(context).size.height * 0.75),
                 ),
                 itemBuilder: (BuildContext context, int index) {
                   return InkWell(
@@ -92,7 +92,8 @@ class _viewallState extends State<viewall> {
                           children: [
                             GestureDetector(
                               child: Container(
-                                height: 120,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.15,
                                 width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
@@ -114,7 +115,7 @@ class _viewallState extends State<viewall> {
                               ),
                             ),
                             SizedBox(
-                              height: 12,
+                              height: 8,
                             ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.end,

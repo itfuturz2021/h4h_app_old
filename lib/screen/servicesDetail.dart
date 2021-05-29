@@ -52,7 +52,7 @@ class _servicesDetailState extends State<servicesDetail> {
                   }).toList(),
                   hint: Container(
                     height: 50,
-                    width: MediaQuery.of(context).size.width * 0.83,
+                    width: MediaQuery.of(context).size.width * 0.80,
                     child: Center(
                       child: Text(
                         unitHintText,
@@ -67,6 +67,9 @@ class _servicesDetailState extends State<servicesDetail> {
                   },
                 ),
               ),
+            ),
+            SizedBox(
+              height: 10,
             ),
             Expanded(
               child: ListView.builder(

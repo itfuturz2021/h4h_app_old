@@ -262,7 +262,7 @@ class _dashboardState extends State<dashboard> {
                                                   (MediaQuery.of(context)
                                                           .size
                                                           .height *
-                                                      0.60),
+                                                      0.80),
                                         ),
                                         itemBuilder:
                                             (BuildContext context, int index) {
@@ -280,15 +280,19 @@ class _dashboardState extends State<dashboard> {
                                                           )));
                                             },
                                             child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(5.0),
+                                                padding: const EdgeInsets.only(
+                                                    left: 0.5,
+                                                    right: 0.5,
+                                                    top: 0.5),
                                                 child: Column(
                                                   children: [
                                                     GestureDetector(
                                                       child: Container(
-                                                        padding: EdgeInsets.all(
-                                                            10.0),
-                                                        height: 90,
+                                                        height: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height *
+                                                            0.15,
                                                         width: MediaQuery.of(
                                                                 context)
                                                             .size
@@ -335,7 +339,7 @@ class _dashboardState extends State<dashboard> {
                                                       ),
                                                     ),
                                                     SizedBox(
-                                                      height: 12,
+                                                      height: 8,
                                                     ),
                                                     Column(
                                                       mainAxisAlignment:

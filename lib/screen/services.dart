@@ -66,7 +66,7 @@ class _servicesState extends State<services> {
                 mainAxisSpacing: 1,
                 crossAxisSpacing: 1,
                 childAspectRatio: MediaQuery.of(context).size.width /
-                    (MediaQuery.of(context).size.height * 0.70),
+                    (MediaQuery.of(context).size.height * 0.90),
               ),
               itemBuilder: (BuildContext context, int index) {
                 return InkWell(
@@ -84,8 +84,8 @@ class _servicesState extends State<services> {
                         children: [
                           GestureDetector(
                             child: Container(
-                              height: 70,
-                              width: MediaQuery.of(context).size.width,
+                              height: MediaQuery.of(context).size.height * 0.10,
+                              width: MediaQuery.of(context).size.width * 0.20,
                               decoration: BoxDecoration(
                                   image: DecorationImage(
                                       image: AssetImage("images/h4hblk.png"),
