@@ -11,11 +11,14 @@ import 'package:h4h/screen/servicesDetail.dart';
 import 'package:h4h/screen/signup.dart';
 import 'package:h4h/screen/splash.dart';
 import 'package:h4h/screen/viewall.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -24,7 +27,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(),
+      theme: ThemeData(
+        primaryColor: Colors.orangeAccent,
+        primaryColorDark: Colors.orange,
+      ),
       initialRoute: '/',
       routes: {
         '/': (context) => splash(),

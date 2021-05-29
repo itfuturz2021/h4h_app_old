@@ -246,7 +246,8 @@ class _dashboardState extends State<dashboard> {
                                   Expanded(
                                     child: Container(
                                       child: GridView.builder(
-                                        physics: BouncingScrollPhysics(),
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
                                         shrinkWrap: true,
                                         padding: EdgeInsets.all(10),
                                         itemCount: 9,

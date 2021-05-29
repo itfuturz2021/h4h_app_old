@@ -62,11 +62,11 @@ class _servicesState extends State<services> {
               padding: EdgeInsets.all(10),
               itemCount: data.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 5,
+                crossAxisCount: 4,
                 mainAxisSpacing: 1,
                 crossAxisSpacing: 1,
                 childAspectRatio: MediaQuery.of(context).size.width /
-                    (MediaQuery.of(context).size.height * 0.90),
+                    (MediaQuery.of(context).size.height * 0.95),
               ),
               itemBuilder: (BuildContext context, int index) {
                 return InkWell(
@@ -85,7 +85,7 @@ class _servicesState extends State<services> {
                           GestureDetector(
                             child: Container(
                               height: MediaQuery.of(context).size.height * 0.10,
-                              width: MediaQuery.of(context).size.width * 0.20,
+                              width: MediaQuery.of(context).size.width * 0.18,
                               decoration: BoxDecoration(
                                   image: DecorationImage(
                                       image: AssetImage("images/h4hblk.png"),

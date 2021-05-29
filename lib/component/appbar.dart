@@ -4,6 +4,7 @@ import 'package:badges/badges.dart';
 import 'package:h4h/screen/Detail.dart';
 import 'package:h4h/screen/Search.dart';
 import 'package:h4h/screen/mycart.dart';
+import 'package:h4h/globals.dart' as global;
 
 AppBar myAppBar(BuildContext context, String appbarname) {
   var firstchar = appbarname[0].toUpperCase();
@@ -44,8 +45,7 @@ AppBar myAppBar(BuildContext context, String appbarname) {
       ),
       Badge(
         badgeContent: Text(
-          '3',
-          // global.in_cart,
+          global.in_cart,
           style: TextStyle(color: Colors.white),
         ),
         position: BadgePosition.topEnd(top: 3, end: 5),

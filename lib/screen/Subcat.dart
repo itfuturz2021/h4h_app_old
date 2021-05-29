@@ -71,7 +71,7 @@ class _subcatState extends State<subcat> {
                   mainAxisSpacing: 3,
                   crossAxisSpacing: 3,
                   childAspectRatio: MediaQuery.of(context).size.width /
-                      (MediaQuery.of(context).size.height * 0.60),
+                      (MediaQuery.of(context).size.height * 0.80),
                 ),
                 itemBuilder: (BuildContext context, int index) {
                   return InkWell(
@@ -91,7 +91,8 @@ class _subcatState extends State<subcat> {
                           children: [
                             GestureDetector(
                               child: Container(
-                                height: 120,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.15,
                                 width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
