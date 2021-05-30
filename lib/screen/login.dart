@@ -8,8 +8,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mobile_number/mobile_number.dart';
-import 'package:country_code_picker/country_code_picker.dart';
-import 'mycart.dart';
 
 class login extends StatefulWidget {
   @override
@@ -19,7 +17,7 @@ class login extends StatefulWidget {
 class _loginState extends State<login> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController txtMobileNumber = TextEditingController();
-  String _mobileNumber = '', country_code = "+91";
+  String _mobileNumber = '';
   List<SimCard> _simCard = <SimCard>[];
   @override
   void initState() {
@@ -107,24 +105,13 @@ class _loginState extends State<login> {
                       filled: true,
                       counterText: "",
                       hintText: "MOBILE NUMBER",
-                      /*prefixIcon: Padding(
+                      prefixIcon: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Image.asset(
                           "images/phone-call.png",
                           height: 10,
                           width: 10,
                         ),
-                      ),*/
-                      prefixIcon: CountryCodePicker(
-                        onChanged: (c) {
-                          country_code = c.toString();
-                        },
-                        initialSelection: 'IN',
-                        showCountryOnly: false,
-                        showOnlyCountryWhenClosed: false,
-                        /* alignLeft: true,
-                        showFlag: false,*/
-                        favorite: ['+91', 'IN'],
                       ),
                     ),
                     validator: (phone) {
@@ -164,12 +151,8 @@ class _loginState extends State<login> {
                         MaterialPageRoute(
                             builder: (context) => OTP(
                                   mobileNo: txtMobileNumber.text,
-                                  countrycode: country_code,
                                   onSuccess: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => mycart()));
+                                    print("hellooo");
                                   },
                                 )));
                   },
