@@ -27,10 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: Colors.orangeAccent,
-        primaryColorDark: Colors.orange,
-      ),
+      theme: ThemeData(),
       initialRoute: '/',
       routes: {
         '/': (context) => splash(),

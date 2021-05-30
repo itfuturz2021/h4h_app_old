@@ -386,8 +386,9 @@ class _dashboardState extends State<dashboard> {
                                       Text(
                                         "Most populer",
                                         style: TextStyle(
-                                            color: Colors.black45,
-                                            fontSize: 16),
+                                            color: Colors.black,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ],
                                   ),
@@ -412,40 +413,68 @@ class _dashboardState extends State<dashboard> {
                                                 child: Padding(
                                                   padding:
                                                       const EdgeInsets.all(9.0),
-                                                  child: Card(
-                                                    elevation: 3,
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10.0),
-                                                    ),
-                                                    color: Colors.white,
-                                                    child: Container(
-                                                      padding:
-                                                          EdgeInsets.all(9.0),
-                                                      height:
-                                                          MediaQuery.of(context)
+                                                  child: Column(
+                                                    children: [
+                                                      Card(
+                                                        elevation: 3,
+                                                        shape:
+                                                            RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      10.0),
+                                                        ),
+                                                        color: Colors.white,
+                                                        child: Container(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  9.0),
+                                                          height: 110,
+                                                          width: MediaQuery.of(
+                                                                      context)
                                                                   .size
-                                                                  .height *
-                                                              0.083,
-                                                      width: 150,
-                                                      decoration: BoxDecoration(
-                                                        image: DecorationImage(
-                                                            image: mdata[index][
-                                                                        "itemImage"] !=
-                                                                    null
-                                                                ? NetworkImage(
-                                                                    image_url +
-                                                                        mdata[index]
-                                                                            [
-                                                                            "itemImage"],
-                                                                  )
-                                                                : AssetImage(
-                                                                    "images/h4hb.png"),
-                                                            fit: BoxFit.cover),
+                                                                  .width *
+                                                              0.30,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            image:
+                                                                DecorationImage(
+                                                                    image: mdata[index]["itemImage"] !=
+                                                                            null
+                                                                        ? NetworkImage(
+                                                                            image_url +
+                                                                                mdata[index]["itemImage"],
+                                                                          )
+                                                                        : AssetImage(
+                                                                            "images/h4hb.png"),
+                                                                    fit: BoxFit
+                                                                        .cover),
+                                                          ),
+                                                        ),
                                                       ),
-                                                    ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Container(
+                                                        height: 25,
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            0.32,
+                                                        child: Text(
+                                                          mdata[index]
+                                                                  ["itemName"]
+                                                              .toString(),
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          softWrap: true,
+                                                          maxLines: 1,
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                               )),
