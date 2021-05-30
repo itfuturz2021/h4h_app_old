@@ -7,7 +7,6 @@ import 'package:h4h/Comman/services.dart';
 import 'package:h4h/component/appbar.dart';
 import 'package:h4h/screen/Detail.dart';
 import 'package:badges/badges.dart';
-import 'package:h4h/screen/ProductDetail.dart';
 
 class item extends StatefulWidget {
   String catid, subcatid, name;
@@ -70,8 +69,8 @@ class _itemState extends State<item> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ProductDetail(
-                                      product: data[index],
+                                builder: (context) => detail(
+                                      data: data[index],
                                     )));
                       },
                       child: Padding(
@@ -120,22 +119,11 @@ class _itemState extends State<item> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.50,
-                                            child: Text(
-                                              data[index]["itemName"]
-                                                  .toString(),
-                                              style: TextStyle(
+                                          Text(
+                                            data[index]["itemName"].toString(),
+                                            style: TextStyle(
                                                 color: Colors.blue[300],
-                                                fontSize: 18,
-                                              ),
-                                              softWrap: true,
-                                              overflow: TextOverflow.ellipsis,
-                                              maxLines: 2,
-                                            ),
+                                                fontSize: 18),
                                           ),
                                           Text(
                                             data[index]["volumeId"][0]

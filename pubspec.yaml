@@ -47,7 +47,6 @@ dev_dependencies:
   pin_input_text_field: any
   pin_code_text_field: ^1.6.0
   mobile_number:
-  country_code_picker: 1.7.0
 
 
 
@@ -73,7 +72,6 @@ flutter:
      - images/whatsapp.png
      - images/chat.png
      - images/telephone.png
-     - images/price_badge.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

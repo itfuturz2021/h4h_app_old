@@ -8,10 +8,10 @@ import 'package:flutter/services.dart';
 import 'package:pin_input_text_field/pin_input_text_field.dart';
 
 class OTP extends StatefulWidget {
-  String mobileNo, newuser, countrycode;
+  String mobileNo, newuser;
   Function onSuccess;
 
-  OTP({this.mobileNo, this.onSuccess, this.countrycode});
+  OTP({this.mobileNo, this.onSuccess});
 
   @override
   _OTPState createState() => _OTPState();
@@ -79,7 +79,7 @@ class _OTPState extends State<OTP> {
     // TODO: Change country code
 
     await _firebaseAuth.verifyPhoneNumber(
-        phoneNumber: "${widget.countrycode}${widget.mobileNo}",
+        phoneNumber: "+91${widget.mobileNo}",
         timeout: const Duration(seconds: 60),
         verificationCompleted: verificationCompleted,
         verificationFailed: verificationFailed,
